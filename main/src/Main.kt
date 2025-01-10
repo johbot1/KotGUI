@@ -3,6 +3,7 @@
 //Desc:
 //
 import java.awt.*
+import java.util.concurrent.Flow
 import javax.swing.*
 import javax.swing.border.Border
 
@@ -15,26 +16,29 @@ fun main() {
     //Calculator Display Panel
     val calcDisplay = JPanel()
     calcDisplay.background = Color.CYAN
-    calcDisplay.preferredSize = Dimension(200, mainJframe.height/4)
+    calcDisplay.preferredSize = Dimension(mainJframe.width/2, mainJframe.height/4)
     calcDisplay.border = BorderFactory.createLineBorder(Color.BLACK,3,false)
 
-
-
     //Calculator Display Label
-    //TODO: Align this box to the right to display values
-    val calcLabel = JLabel("Hello, World!")
-    calcLabel.setFont(Font("Verdana", Font.BOLD, 30))
+    val calcLabel = JLabel("450,321.06")
+    calcLabel.setFont(Font("Verdana", Font.PLAIN, 65))
     calcDisplay.add(calcLabel)
+
+    //FlowLayout test
+    val flowLayout = FlowLayout(FlowLayout.RIGHT)
+    calcDisplay.layout = flowLayout
 
     //Button Section
     val buttonPanel = JPanel()
     buttonPanel.border = BorderFactory.createLoweredBevelBorder()
-    mainJframe.add(buttonPanel)
+    buttonPanel.background = Color.LIGHT_GRAY
+    buttonPanel.border = BorderFactory.createLineBorder(Color.BLACK,3,false)
 
 
 
 
     mainJframe.add(calcDisplay, BorderLayout.NORTH)
+    mainJframe.add(buttonPanel)
 
     mainJframe.isVisible = true
     mainJframe.isResizable = false
