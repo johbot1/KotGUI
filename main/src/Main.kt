@@ -27,23 +27,19 @@ fun main() {
     val flowLayout = FlowLayout(FlowLayout.RIGHT)
     calcDisplay.layout = flowLayout
 
-    //Button Section
+    //Button Section - Will eventually be folded into Constructors
     val buttonPanel = JPanel()
     buttonPanel.border = BorderFactory.createLoweredBevelBorder()
     buttonPanel.background = Color.LIGHT_GRAY
     buttonPanel.border = BorderFactory.createLineBorder(Color.BLACK,3,false)
 
-    //Button Generation
+    //Button Generation - Will eventually be folded into Constructors
     val numberButtonList = mutableListOf<JButton>()
     for (i in 0..9){
         val button = createNumberButtons(i)
         numberButtonList.add(button)
         buttonPanel.add(button)
     }
-
-
-
-
     mainJframe.add(calcDisplay, BorderLayout.NORTH)
     mainJframe.add(buttonPanel)
 
