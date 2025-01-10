@@ -7,6 +7,7 @@ import java.util.concurrent.Flow
 import javax.swing.*
 import javax.swing.border.Border
 
+
 fun main() {
     val mainJframe = JFrame("Calculator")
     mainJframe.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
@@ -20,7 +21,7 @@ fun main() {
     calcDisplay.border = BorderFactory.createLineBorder(Color.BLACK,3,false)
 
     //Calculator Display Label
-    val calcLabel = JLabel("450,321.06")
+    val calcLabel = JLabel("450,321.06")//Test number to gauge size
     calcLabel.setFont(Font("Verdana", Font.PLAIN, 65))
     calcDisplay.add(calcLabel)
 
@@ -33,6 +34,16 @@ fun main() {
     buttonPanel.border = BorderFactory.createLoweredBevelBorder()
     buttonPanel.background = Color.LIGHT_GRAY
     buttonPanel.border = BorderFactory.createLineBorder(Color.BLACK,3,false)
+
+    //Button Generation
+    val button0 = createNumberButtons(0)
+    val button1 = createNumberButtons(1)
+    val button2 = createNumberButtons(2)
+    val button3 = createNumberButtons(3)
+    buttonPanel.add(button0)
+    buttonPanel.add(button1)
+    buttonPanel.add(button2)
+    buttonPanel.add(button3)
 
 
 
