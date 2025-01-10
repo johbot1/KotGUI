@@ -1,33 +1,41 @@
-import java.awt.BorderLayout
-import java.awt.Color
+//Main.kt
+//Author: John Botonakis
+//Desc:
+//
+import java.awt.*
 import javax.swing.*
-import java.awt.Dimension
+import javax.swing.border.Border
 
 fun main() {
-    val main_Jframe = JFrame("Hello, World!")
-    main_Jframe.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
-    main_Jframe.size = Dimension(500, 500)
+    val mainJframe = JFrame("Calculator")
+    mainJframe.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+    mainJframe.size = Dimension(500, 500)
+    mainJframe.setLocationRelativeTo(null)
 
-    val label = JLabel("Hello, World!")
-    label.verticalAlignment = SwingConstants.CENTER
-    label.horizontalAlignment = SwingConstants.CENTER
-    main_Jframe.add(label)
-
-    //Calculator Display
+    //Calculator Display Panel
     val calcDisplay = JPanel()
     calcDisplay.background = Color.CYAN
-    calcDisplay.preferredSize = Dimension(450, main_Jframe.height/4)
-    //This doesn't work. Why? No px border, it's stuck to both left and right sides
-    //TODO: Fix the way this is rendered to give it a border
-    calcDisplay.border = BorderFactory.createEmptyBorder(150, 150, 150, 150)
-    main_Jframe.add(calcDisplay, BorderLayout.NORTH)
+    calcDisplay.preferredSize = Dimension(200, mainJframe.height/4)
+    calcDisplay.border = BorderFactory.createLineBorder(Color.BLACK,3,false)
+
+
+
+    //Calculator Display Label
+    //TODO: Align this box to the right to display values
+    val calcLabel = JLabel("Hello, World!")
+    calcLabel.setFont(Font("Verdana", Font.BOLD, 30))
+    calcDisplay.add(calcLabel)
+
+    //Button Section
+    val buttonPanel = JPanel()
+    buttonPanel.border = BorderFactory.createLoweredBevelBorder()
+    mainJframe.add(buttonPanel)
 
 
 
 
-    //Initializes the frame in the center of the screen
-    main_Jframe.setLocationRelativeTo(null)
+    mainJframe.add(calcDisplay, BorderLayout.NORTH)
 
-    main_Jframe.isVisible = true
-    main_Jframe.isResizable = false
+    mainJframe.isVisible = true
+    mainJframe.isResizable = false
 }
