@@ -3,9 +3,7 @@
 //Desc:
 //
 import java.awt.*
-import java.util.concurrent.Flow
 import javax.swing.*
-import javax.swing.border.Border
 
 
 fun main() {
@@ -36,14 +34,12 @@ fun main() {
     buttonPanel.border = BorderFactory.createLineBorder(Color.BLACK,3,false)
 
     //Button Generation
-    val button0 = createNumberButtons(0)
-    val button1 = createNumberButtons(1)
-    val button2 = createNumberButtons(2)
-    val button3 = createNumberButtons(3)
-    buttonPanel.add(button0)
-    buttonPanel.add(button1)
-    buttonPanel.add(button2)
-    buttonPanel.add(button3)
+    val numberButtonList = mutableListOf<JButton>()
+    for (i in 0..9){
+        val button = createNumberButtons(i)
+        numberButtonList.add(button)
+        buttonPanel.add(button)
+    }
 
 
 
