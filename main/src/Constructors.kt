@@ -8,8 +8,7 @@ import javax.swing.*
 
 
 //PanelConstructor
-//Creates and populates the section for the individual digit numbers
-//And puts them on the mainJFrame
+//Creates panels
 class PanelConstructor(val panelName: String){
     val panel = JPanel().also{
         it.name = panelName
@@ -56,18 +55,26 @@ class PanelConstructor(val panelName: String){
         val buttonName = "btn_$number"
         return JButton(number.toString()).also{
             it.name = buttonName
-            println("Created Button: ${it.name}")//Debugging tool
+            //TODO: Add functionality to these buttons aside from just printing name
+            it.addActionListener {
+                println("$buttonName clicked!")
+            }
+//            println("Created Button: ${it.name}")//Debugging tool
         }
     }
 
     //createOperationButtons
-    //Creates buttons for numbers, and returns them with
-    //their name being "btn_number"
+    //Creates buttons for operations, and returns them with
+    //their name being "btn_operation"
     private fun createOperationButtons(operation: String): JButton {
         val buttonName = "btn_$operation"
         return JButton(operation.toString()).also{
             it.name = buttonName
-            println("Created Button: ${it.name}")//Debugging tool
+            //TODO: Add functionality to these buttons
+            it.addActionListener {
+                println("$buttonName clicked!")
+            }
+//            println("Created Button: ${it.name}")//Debugging tool
         }
     }
 }

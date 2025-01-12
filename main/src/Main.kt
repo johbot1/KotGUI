@@ -31,13 +31,10 @@ fun main() {
     val buttonPanel = PanelConstructor("buttons")
     mainJframe.add(buttonPanel.panel)
 
-
     //Operations Panel
     //Using the PanelConstructor, create an operations panel
     val operationsPanel = PanelConstructor("operands")
     mainJframe.add(operationsPanel.panel, BorderLayout.EAST)
-
-
 
 
     //MainJFrame attributes
