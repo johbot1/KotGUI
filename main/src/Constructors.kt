@@ -14,6 +14,8 @@ class PanelConstructor(val panelName: String){
         it.name = panelName
         println("Created panel: $panelName")
     }
+    val buttons: MutableMap<String, JButton> = mutableMapOf()
+
     init{
         when(panelName){
             "buttons" -> {
@@ -48,6 +50,7 @@ class PanelConstructor(val panelName: String){
         }
 
     }
+
     //createNumberButtons
     //Creates buttons for numbers, and returns them with
     //their name being "btn_number"
@@ -57,7 +60,7 @@ class PanelConstructor(val panelName: String){
             it.name = buttonName
             //TODO: Add functionality to these buttons aside from just printing name
             it.addActionListener {
-                println("$buttonName clicked!")
+                println("${buttonName} clicked!")
             }
 //            println("Created Button: ${it.name}")//Debugging tool
         }
@@ -68,7 +71,7 @@ class PanelConstructor(val panelName: String){
     //their name being "btn_operation"
     private fun createOperationButtons(operation: String): JButton {
         val buttonName = "btn_$operation"
-        return JButton(operation.toString()).also{
+        val button = JButton(operation.toString()).also{
             it.name = buttonName
             //TODO: Add functionality to these buttons
             it.addActionListener {
@@ -76,5 +79,13 @@ class PanelConstructor(val panelName: String){
             }
 //            println("Created Button: ${it.name}")//Debugging tool
         }
+            buttons[buttonName] = button
+        return button
+    }
+
+    //getButton
+    //Returns the button object
+    fun getButton(buttonName: String): JButton? {
+         return buttons[buttonName]
     }
 }
