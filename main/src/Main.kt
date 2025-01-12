@@ -17,32 +17,30 @@ fun main() {
     calcDisplay.background = Color.CYAN
     calcDisplay.preferredSize = Dimension(mainJframe.width/2, mainJframe.height/4)
     calcDisplay.border = BorderFactory.createLineBorder(Color.BLACK,3,false)
-
     //Calculator Display Label
     val calcLabel = JLabel("450,321.06")//Test number to gauge size
     calcLabel.setFont(Font("Verdana", Font.PLAIN, 65))
     calcDisplay.add(calcLabel)
-
     //FlowLayout test
     val flowLayout = FlowLayout(FlowLayout.RIGHT)
     calcDisplay.layout = flowLayout
-
-    //Button Section - Will eventually be folded into Constructors
-    val buttonPanel = JPanel()
-    buttonPanel.border = BorderFactory.createLoweredBevelBorder()
-    buttonPanel.background = Color.LIGHT_GRAY
-    buttonPanel.border = BorderFactory.createLineBorder(Color.BLACK,3,false)
-
-    //Button Generation - Will eventually be folded into Constructors
-    val numberButtonList = mutableListOf<JButton>()
-    for (i in 0..9){
-        val button = createNumberButtons(i)
-        numberButtonList.add(button)
-        buttonPanel.add(button)
-    }
     mainJframe.add(calcDisplay, BorderLayout.NORTH)
-    mainJframe.add(buttonPanel)
 
+    //Button Panel
+    //Using the PanelConstructor, create a buttons panel
+    val buttonPanel = PanelConstructor("buttons")
+    mainJframe.add(buttonPanel.panel)
+
+
+    //Operations Panel
+    //Using the PanelConstructor, create an operations panel
+    val operationsPanel = PanelConstructor("operands")
+    mainJframe.add(operationsPanel.panel, BorderLayout.EAST)
+
+
+
+
+    //MainJFrame attributes
     mainJframe.isVisible = true
     mainJframe.isResizable = false
 }
