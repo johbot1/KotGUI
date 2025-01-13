@@ -13,18 +13,16 @@ fun main() {
     mainJframe.setLocationRelativeTo(null)
 
     //Calculator Display Panel
-    val calcDisplay = JPanel()
-    calcDisplay.background = Color.CYAN
-    calcDisplay.preferredSize = Dimension(mainJframe.width/2, mainJframe.height/4)
-    calcDisplay.border = BorderFactory.createLineBorder(Color.BLACK,3,false)
+    val calcDisplay = PanelConstructor("display")
+    mainJframe.add(calcDisplay.panel, BorderLayout.NORTH)
+
     //Calculator Display Label
     val calcLabel = JLabel("450,321.06")//Test number to gauge size
     calcLabel.setFont(Font("Verdana", Font.PLAIN, 65))
-    calcDisplay.add(calcLabel)
+    calcDisplay.add(calcLabel, "display")
     //FlowLayout test
     val flowLayout = FlowLayout(FlowLayout.RIGHT)
-    calcDisplay.layout = flowLayout
-    mainJframe.add(calcDisplay, BorderLayout.NORTH)
+
 
     //Button Panel
     //Using the PanelConstructor, create a buttons panel
