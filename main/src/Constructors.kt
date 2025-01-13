@@ -9,6 +9,7 @@ import javax.swing.*
 
 //PanelConstructor
 //Creates panels
+//TODO: Change this in such a way, it returns the panels created for ease of access
 class PanelConstructor(val panelName: String){
     val panel = JPanel().also{
         it.name = panelName

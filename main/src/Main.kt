@@ -16,6 +16,8 @@ fun main() {
     val calcDisplay = PanelConstructor("display")
     mainJframe.add(calcDisplay.panel, BorderLayout.NORTH)
 
+
+
     //Calculator Display Label
     val calcLabel = JLabel("450,321.06")//Test number to gauge size
     calcLabel.setFont(Font("Verdana", Font.PLAIN, 65))
