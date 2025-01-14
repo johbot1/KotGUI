@@ -42,6 +42,7 @@ fun main() {
     val buttonPanelHeight = 250
     buttonPanel.border = BorderFactory.createRaisedBevelBorder()
     buttonPanel.background = Color.GREEN
+    buttonPanel.setLayout(GridLayout(3,2))
     buttonPanel.preferredSize = Dimension(buttonPanelWidth,buttonPanelHeight)
     mainJframe.add(buttonPanel, BorderLayout.WEST)
     //Buttons
@@ -56,6 +57,7 @@ fun main() {
     operationsPanel.border = BorderFactory.createLoweredBevelBorder()
     operationsPanel.background = Color.LIGHT_GRAY
     operationsPanel.preferredSize = Dimension(operationDimensions,operationDimensions)
+    operationsPanel.setLayout(GridLayout(7,1))
     mainJframe.add(operationsPanel, BorderLayout.EAST)
     //Buttons
     addButtons("oper_",buttonList,operationsPanel)

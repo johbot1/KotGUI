@@ -1,7 +1,8 @@
-//HelperFunctions.kt
-//Author: John Botonakis
-//Desc:
-//
+/**
+ * Helper Functions
+ * @author John Botonakis
+ * @desc
+ */
 import java.awt.Dimension
 import java.awt.Font
 import javax.swing.JButton
@@ -13,9 +14,13 @@ val opButtonDimensions = 25
 val calcButtonWidth = 80
 val calcButtonHeight = 75
 
-//createNumberButtons
-//Creates buttons for numbers, and returns them with
-//their name being "btn_number"
+
+/**
+ * Creates buttons for numbers and operations, and returns them in a populated list.
+ * Each of the names are assigned a prefix based on their function in the program
+ * "btn_" is a number button prefix, while "oper_" is the operational button prefix
+ * @return A mutable list of JButton objects ready for assignment
+ */
 fun createButtons(): MutableList<JButton> {
     val buttonStorage = mutableListOf<JButton>()
     //Creating all NUMBER buttons
@@ -42,9 +47,18 @@ fun createButtons(): MutableList<JButton> {
     return buttonStorage
 }
 
+/**
+ * Filters a button list with a specified prefix, then attaches them to a specified JPanel
+ * @param prefix  The prefix string that each button name has to identify its button type
+ * @param buttonList  A list of JButton objects to sort through
+ * @param homePanel  The panel where each of the filtered buttons will be stuck to
+ */
 fun addButtons(prefix: String, buttonList: MutableList<JButton>, homePanel: JPanel){
     val filteredButtons = buttonList.filter { it.name.startsWith(prefix) }
     for (button in filteredButtons) {
+        button.addActionListener {
+            println("Button ${button.name} has been clicked!")
+        }
         homePanel.add(button)
     }
 }
