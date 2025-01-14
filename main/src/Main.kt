@@ -6,6 +6,12 @@ import java.awt.*
 import javax.swing.*
 
 
+//Declare Labels/Panels
+val calcLabel = JLabel("245")
+val calcScreenDisplay = JPanel()
+val buttonPanel = JPanel()
+val operationsPanel = JPanel()
+
 fun main() {
     //mainJframe setup
     val mainJframe = JFrame("Calculator")
@@ -17,7 +23,6 @@ fun main() {
     val buttonList = createButtons()
 
     //Calculator "Screen" Panel
-    val calcScreenDisplay = JPanel()
     val screenWidth = 250
     val screenHeight = screenWidth/2
     calcScreenDisplay.name = "calcDisplay"
@@ -28,7 +33,7 @@ fun main() {
 
     //Calculator Display Label
     val calcDisplayFont = 65
-    val calcLabel = JLabel("450,321.06")//Test number to gauge size
+    calcLabel.horizontalAlignment = SwingConstants.RIGHT
     calcLabel.setFont(Font("Verdana", Font.PLAIN, calcDisplayFont))
     calcScreenDisplay.add(calcLabel, "display")
 
@@ -37,7 +42,6 @@ fun main() {
     //Button Panel
     //Using the PanelConstructor, create a buttons panel
     //ButtonPanelWidth MUST equal 500 when combining with operationDimensions
-    val buttonPanel = JPanel()
     val buttonPanelWidth = 350
     val buttonPanelHeight = 250
     buttonPanel.border = BorderFactory.createRaisedBevelBorder()
@@ -52,7 +56,6 @@ fun main() {
     //Operations Panel
     //Using the PanelConstructor, create an operations panel
     //OperationDimenesions MUST equal 500 when combining with ButtonPanelWidth
-    val operationsPanel = JPanel()
     val operationDimensions = 150
     operationsPanel.border = BorderFactory.createLoweredBevelBorder()
     operationsPanel.background = Color.LIGHT_GRAY

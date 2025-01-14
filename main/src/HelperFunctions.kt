@@ -5,7 +5,9 @@
  */
 import java.awt.Dimension
 import java.awt.Font
+import java.awt.Label
 import javax.swing.JButton
+import javax.swing.JLabel
 import javax.swing.JPanel
 
 val operandsLabels = listOf("+",".","-","*","/","=","clr")
@@ -57,8 +59,17 @@ fun addButtons(prefix: String, buttonList: MutableList<JButton>, homePanel: JPan
     val filteredButtons = buttonList.filter { it.name.startsWith(prefix) }
     for (button in filteredButtons) {
         button.addActionListener {
-            println("Button ${button.name} has been clicked!")
+            buttonBehavior(prefix,button,calcLabel)
         }
         homePanel.add(button)
     }
+}
+
+fun buttonBehavior(prefix: String,button: JButton, label: JLabel) {
+    val tempname = button.name.removePrefix(prefix)
+    label.text = tempname
+}
+
+fun reset(label: JLabel){
+    label.text = "0"
 }
