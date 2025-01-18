@@ -69,11 +69,17 @@ fun addNumButtons(buttonList: List<JButton>, homePanel: JPanel){
  * then apply that number as text to the calcLabel display
  */
 fun numButtonsBehavior(button: JButton) {
-    val activeNumStr = activeNum.toString() + button.name
-    calcLabel.text = activeNumStr
-    activeNum = activeNumStr.toInt()
+    if (activeNum == 0){
+        val activeNumStr = button.name
+        calcLabel.text = activeNumStr
+        activeNum = activeNumStr.toInt()
+    }else{
+        val activeNumStr = activeNum.toString() + button.name
+        calcLabel.text = activeNumStr
+        activeNum = activeNumStr.toInt()
+    }
     println("activeNum: $activeNum")
-}
+    }
 
 /**
  * Filters a button list with a specified prefix, then attaches them to a specified JPanel
@@ -101,38 +107,15 @@ fun resetCalcDisplay(label: JLabel){
  */
 fun assignOperation(opButton: JButton){
     when(opButton.text){
-        "+" -> {
+        "+", "-", "*", "/" -> {
             opButton.addActionListener {
                 currentOperation = opButton.text
                 storedNum = activeNum
                 activeNum = 0
-//                println(opButton.text + " clicked!") //Used for debugging purposes
+                println(opButton.text + " clicked!") //Used for debugging purposes
             }
         }
-        "-" -> {
-            opButton.addActionListener {
-                storedNum = activeNum
-                activeNum = 0
-                currentOperation = opButton.text
-//                println(opButton.text + " clicked!") //Used for debugging purposes
-            }
-        }
-        "*" -> {
-            opButton.addActionListener {
-                storedNum = activeNum
-                activeNum = 0
-                currentOperation = opButton.text
-//                println(currentOperation) //Used for debugging purposes
-            }
-        }
-        "/" -> {
-            opButton.addActionListener {
-                storedNum = activeNum
-                activeNum = 0
-                currentOperation = opButton.text
-//                println(opButton.text + " clicked!") //Used for debugging purposes
-            }
-        }
+
         "=" -> {
             opButton.addActionListener {
                 equate()
