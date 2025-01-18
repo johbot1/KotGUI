@@ -11,9 +11,9 @@ import javax.swing.JPanel
 
 val operandsLabels = listOf("+",".","-","*","/","=","clr")
 val numberLabels = listOf(0,1,2,3,4,5,6,7,8,9)
-val opButtonDimensions = 25
-val calcButtonWidth = 80
-val calcButtonHeight = 75
+const val opButtonDimensions = 25
+const val calcButtonWidth = 80
+const val calcButtonHeight = 75
 
 
 /**
@@ -58,7 +58,7 @@ fun createButtons(): Pair <List<JButton>, List<JButton>> {
 fun addNumButtons(buttonList: List<JButton>, homePanel: JPanel){
        for (button in buttonList) {
         button.addActionListener {
-            numButtonsBehavior("btn_",button,calcLabel)
+            numButtonsBehavior("btn_",button)
         }
         homePanel.add(button)
     }
@@ -68,7 +68,7 @@ fun addNumButtons(buttonList: List<JButton>, homePanel: JPanel){
  * Assigns behavior to a number button; that behavior is to strip it of its prefix
  * then apply that number as text to the calcLabel display
  */
-fun numButtonsBehavior(prefix: String, button: JButton, label: JLabel) {
+fun numButtonsBehavior(prefix: String, button: JButton) {
     val tempname = button.name.removePrefix(prefix)
     val activeNumStr = activeNum.toString() + tempname
     calcLabel.text = activeNumStr
@@ -78,14 +78,12 @@ fun numButtonsBehavior(prefix: String, button: JButton, label: JLabel) {
 
 /**
  * Filters a button list with a specified prefix, then attaches them to a specified JPanel
- * @param prefix  The prefix string that each button name has to identify its button type
  * @param buttonList  A list of JButton objects to sort through
  * @param homePanel  The panel where each of the filtered buttons will be stuck to
  */
 fun addOpButtons(buttonList: List<JButton>, homePanel: JPanel){
         for (button in buttonList) {
-            val tempname = button.name.removePrefix("oper_")
-            assignOperation(button,tempname)
+            assignOperation(button)
             homePanel.add(button)
     }
 }
@@ -101,9 +99,8 @@ fun resetCalcDisplay(label: JLabel){
 /**
  *
  * @param opButton
- * @param tempName
  */
-fun assignOperation(opButton: JButton, tempName: String){
+fun assignOperation(opButton: JButton){
     when(opButton.text){
         "+" -> {
             opButton.addActionListener {

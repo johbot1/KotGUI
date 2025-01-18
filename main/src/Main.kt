@@ -4,7 +4,7 @@
 //
 import java.awt.*
 import javax.swing.*
-import java.util.Date
+//import java.util.Date
 
 
 //Declare Labels/Panels
@@ -69,7 +69,6 @@ fun main() {
     operationsPanel.setLayout(GridLayout(7,1))
     mainJframe.add(operationsPanel, BorderLayout.EAST)
     //Buttons
-//    addNumButtons("oper_",operationalButtons,operationsPanel)
     addOpButtons(operationalButtons,operationsPanel)
 
     //MainJFrame attributes
