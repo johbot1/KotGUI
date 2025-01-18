@@ -28,7 +28,7 @@ fun createButtons(): Pair <List<JButton>, List<JButton>> {
     val operationalButtons = mutableListOf<JButton>()
     //Creating all NUMBER buttons
     for (label in numberLabels){
-        val buttonName = "btn_$label"
+        val buttonName = "$label"
         val button = JButton(label.toString())
         button.name = buttonName
         button.preferredSize = Dimension(calcButtonWidth,calcButtonHeight)
@@ -58,7 +58,7 @@ fun createButtons(): Pair <List<JButton>, List<JButton>> {
 fun addNumButtons(buttonList: List<JButton>, homePanel: JPanel){
        for (button in buttonList) {
         button.addActionListener {
-            numButtonsBehavior("btn_",button)
+            numButtonsBehavior(button)
         }
         homePanel.add(button)
     }
@@ -68,9 +68,8 @@ fun addNumButtons(buttonList: List<JButton>, homePanel: JPanel){
  * Assigns behavior to a number button; that behavior is to strip it of its prefix
  * then apply that number as text to the calcLabel display
  */
-fun numButtonsBehavior(prefix: String, button: JButton) {
-    val tempname = button.name.removePrefix(prefix)
-    val activeNumStr = activeNum.toString() + tempname
+fun numButtonsBehavior(button: JButton) {
+    val activeNumStr = activeNum.toString() + button.name
     calcLabel.text = activeNumStr
     activeNum = activeNumStr.toInt()
     println("activeNum: $activeNum")
@@ -97,35 +96,39 @@ fun resetCalcDisplay(label: JLabel){
     }
 
 /**
- *
+ * Assigns operations based on the button title
  * @param opButton
  */
 fun assignOperation(opButton: JButton){
     when(opButton.text){
         "+" -> {
             opButton.addActionListener {
+                currentOperation = opButton.text
                 storedNum = activeNum
                 activeNum = 0
-//                println("ActiveNum: $activeNum, Operation: ${opButton.text}, storedNum: $storedNum")
-                currentOperation = opButton.text
 //                println(opButton.text + " clicked!") //Used for debugging purposes
             }
         }
         "-" -> {
             opButton.addActionListener {
                 storedNum = activeNum
+                activeNum = 0
                 currentOperation = opButton.text
 //                println(opButton.text + " clicked!") //Used for debugging purposes
             }
         }
         "*" -> {
             opButton.addActionListener {
+                storedNum = activeNum
+                activeNum = 0
                 currentOperation = opButton.text
 //                println(currentOperation) //Used for debugging purposes
             }
         }
         "/" -> {
             opButton.addActionListener {
+                storedNum = activeNum
+                activeNum = 0
                 currentOperation = opButton.text
 //                println(opButton.text + " clicked!") //Used for debugging purposes
             }
@@ -136,12 +139,7 @@ fun assignOperation(opButton: JButton){
 //                println(opButton.text + " clicked!") //Used for debugging purposes
             }
         }
-        "." -> {
-            opButton.addActionListener {
 
-//                println(opButton.text + " clicked!") //Used for debugging purposes
-            }
-        }
         "clr" -> {opButton.addActionListener {
             activeNum = 0
             storedNum = 0
@@ -152,6 +150,10 @@ fun assignOperation(opButton: JButton){
     }
 }
 
+/**
+ * Handles what happens when the "=" is pressed, signaling a completed equation,
+ * based on the currently selected operation
+ */
 fun equate(){
     when(currentOperation){
         "+" ->{
@@ -171,7 +173,7 @@ fun equate(){
             calcLabel.text = divReturn.toString()
         }
         "*" ->{
-            val multReturn = storedNum + activeNum
+            val multReturn = storedNum * activeNum
             storedNum = multReturn
             calcLabel.text = multReturn.toString()
         }
