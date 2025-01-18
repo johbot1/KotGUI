@@ -4,6 +4,7 @@
 //
 import java.awt.*
 import javax.swing.*
+import java.util.Date
 
 
 //Declare Labels/Panels
@@ -11,16 +12,20 @@ val calcLabel = JLabel("245")
 val calcScreenDisplay = JPanel()
 val buttonPanel = JPanel()
 val operationsPanel = JPanel()
+var currentOperation = ""
+var storedNum = 0
+var activeNum = 0
 
 fun main() {
     //mainJframe setup
     val mainJframe = JFrame("Calculator")
+    val borderThickness = 2
     mainJframe.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
     mainJframe.size = Dimension(500, 500)
     mainJframe.setLocationRelativeTo(null)
 
-    val borderThickness = 2
-    val buttonList = createButtons()
+    //Button Creation
+    val (numberButtons,operationalButtons) = createButtons()
 
     //Calculator "Screen" Panel
     val screenWidth = 250
@@ -35,6 +40,7 @@ fun main() {
     val calcDisplayFont = 65
     calcLabel.horizontalAlignment = SwingConstants.RIGHT
     calcLabel.setFont(Font("Verdana", Font.PLAIN, calcDisplayFont))
+    calcLabel.text = activeNum.toString()
     calcScreenDisplay.add(calcLabel, "display")
 
 
@@ -50,7 +56,7 @@ fun main() {
     buttonPanel.preferredSize = Dimension(buttonPanelWidth,buttonPanelHeight)
     mainJframe.add(buttonPanel, BorderLayout.WEST)
     //Buttons
-    addButtons("btn_",buttonList,buttonPanel)
+    addNumButtons(numberButtons,buttonPanel)
 
 
     //Operations Panel
@@ -63,8 +69,8 @@ fun main() {
     operationsPanel.setLayout(GridLayout(7,1))
     mainJframe.add(operationsPanel, BorderLayout.EAST)
     //Buttons
-    addButtons("oper_",buttonList,operationsPanel)
-
+//    addNumButtons("oper_",operationalButtons,operationsPanel)
+    addOpButtons(operationalButtons,operationsPanel)
 
     //MainJFrame attributes
     mainJframe.isVisible = true
