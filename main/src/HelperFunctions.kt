@@ -13,23 +13,23 @@ import javax.swing.JPanel
 
 /**
  * Creates buttons for numbers and operations, and returns them in a populated list.
- * Each of the names are assigned a prefix based on their function in the program
+ * Each of the names is assigned a prefix based on their function in the program
  * "btn_" is a number button prefix, while "oper_" is the operational button prefix
  *
- * @return Two lists of JButton objects ready for assignment
+ * @return A pair of lists, populated with buttons for specific areas <numberButtons,operationalButtons>
  */
-fun createButtons(): Pair <List<JButton>, List<JButton>> {
+fun createButtons(): Pair<List<JButton>, List<JButton>> {
     val numberButtons = mutableListOf<JButton>()
     val operationalButtons = mutableListOf<JButton>()
+
     //Creating all NUMBER buttons
-    for (label in numberLabels){
+    for (label in numberLabels) {
         val buttonName = "$label"
         val button = JButton(label.toString())
         button.name = buttonName
-        button.preferredSize = Dimension(calcButtonWidth,calcButtonHeight)
+        button.preferredSize = Dimension(calcButtonWidth, calcButtonHeight)
         button.setFont(Font("Verdana", Font.PLAIN, 25))
         numberButtons.add(button)
-//        println("Button $buttonName has been added!")//Used for debugging purposes
     }
 
     //Creating all OPERATIONAL Buttons
@@ -39,7 +39,6 @@ fun createButtons(): Pair <List<JButton>, List<JButton>> {
         button.preferredSize = Dimension(opButtonDimensions, opButtonDimensions)
         button.setFont(Font("Verdana", Font.PLAIN, 30))
         operationalButtons.add(button)
-//        println("Button $buttonName has been added!")//Used for debugging purposes
     }
     return Pair(numberButtons, operationalButtons)
 }
@@ -47,10 +46,10 @@ fun createButtons(): Pair <List<JButton>, List<JButton>> {
 /**
  * Filters a button list with a specified prefix, then attaches them to a specified JPanel
  * @param buttonList  A list of JButton objects to sort through
- * @param homePanel  The panel where each of the filtered buttons will be stuck to
+ * @param homePanel  The JPanel where each of the filtered buttons will be stuck to
  */
-fun addNumButtons(buttonList: List<JButton>, homePanel: JPanel){
-       for (button in buttonList) {
+fun addNumButtons(buttonList: List<JButton>, homePanel: JPanel) {
+    for (button in buttonList) {
         button.addActionListener {
             numButtonsBehavior(button)
         }
@@ -61,39 +60,41 @@ fun addNumButtons(buttonList: List<JButton>, homePanel: JPanel){
 /**
  * Assigns behavior to a number button; that behavior is to strip it of its prefix
  * then apply that number as text to the calcLabel display
+ *
+ * @param button The specific button that needs to be assigned behavior
  */
 fun numButtonsBehavior(button: JButton) {
     if (activeNum == 0) {
         val activeNumStr = button.name
         calcLabel.text = activeNumStr
         activeNum = activeNumStr.toInt()
-    }else{
+    } else {
         val activeNumStr = activeNum.toString() + button.name
         calcLabel.text = activeNumStr
         activeNum = activeNumStr.toInt()
     }
-//    println("activeNum: $activeNum")
-    }
+//    println("activeNum: $activeNum")//Used for debugging
+}
 
 /**
- * Filters a button list with a specified prefix, then attaches them to a specified JPanel
+ * Takes in a list of JButtons, then attaches them to a specified JPanel
  * @param buttonList  A list of JButton objects to sort through
- * @param homePanel  The panel where each of the filtered buttons will be stuck to
+ * @param homePanel  The panel where each of the buttons will be stuck to
  */
-fun addOpButtons(buttonList: List<JButton>, homePanel: JPanel){
-        for (button in buttonList) {
-            assignOperation(button)
-            homePanel.add(button)
+fun addOpButtons(buttonList: List<JButton>, homePanel: JPanel) {
+    for (button in buttonList) {
+        opButtonsBehavior(button)
+        homePanel.add(button)
     }
 }
 
 
 /**
- * Assigns operations based on the button title
- * @param opButton
+ * Assigns a behavior based on the button title
+ * @param opButton The button that will be assigned a behavior
  */
-fun assignOperation(opButton: JButton){
-    when(opButton.text){
+fun opButtonsBehavior(opButton: JButton) {
+    when (opButton.text) {
         //Other Operation Behavior
         "+", "-", "*", "/" -> {
             opButton.addActionListener {
@@ -110,17 +111,21 @@ fun assignOperation(opButton: JButton){
             }
         }
         //Clear Display
-        "clr" -> {opButton.addActionListener {
-            activeNum = 0
-            storedNum = 0
-            calcLabel.text = activeNum.toString()
-            currentOperation = ""
+        "clr" -> {
+            opButton.addActionListener {
+                activeNum = 0
+                storedNum = 0
+                calcLabel.text = activeNum.toString()
+                currentOperation = "input"
+            }
         }
+        //Positive and Negative numbers
+        "+/-" -> {
+            opButton.addActionListener {
+                activeNum *= -1
+                calcLabel.text = activeNum.toString()
+            }
         }
-        "+/-" -> {opButton.addActionListener {
-            //if no prefix, add a "-"
-            //else
-        }}
     }
 }
 
@@ -128,29 +133,31 @@ fun assignOperation(opButton: JButton){
  * Handles what happens when the "=" is pressed, signaling a completed equation,
  * based on the currently selected operation
  */
-fun equate(){
-    when(currentOperation){
-        "+" ->{
+fun equate() {
+    when (currentOperation) {
+        "+" -> {
             val addReturn = storedNum + activeNum
             activeNum = addReturn
             calcLabel.text = addReturn.toString()
-            println("ActiveNum: $activeNum, Operation: $currentOperation, storedNum: $storedNum")
         }
-        "-" ->{
+
+        "-" -> {
             val subReturn = storedNum - activeNum
             storedNum = subReturn
             calcLabel.text = subReturn.toString()
         }
-        "/" ->{
+
+        "/" -> {
             val divReturn = storedNum / activeNum
             storedNum = divReturn
             calcLabel.text = divReturn.toString()
         }
-        "*" ->{
+
+        "*" -> {
             val multReturn = storedNum * activeNum
             storedNum = multReturn
             calcLabel.text = multReturn.toString()
         }
     }
-
+    activeNum = 0
 }

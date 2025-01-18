@@ -8,7 +8,10 @@
  */
 
 import java.awt.*
-import javax.swing.*
+import javax.swing.BorderFactory
+import javax.swing.JFrame
+import javax.swing.SwingConstants
+import java.text.NumberFormat
 
 /**
  * Main
@@ -40,7 +43,7 @@ fun main() {
     //Calculator Display Label
     calcLabel.horizontalAlignment = SwingConstants.RIGHT
     calcLabel.setFont(Font("Verdana", Font.PLAIN, calcDisplayFont))
-    calcLabel.text = activeNum.toString()
+    calcLabel.text = displayNum
     calcScreenDisplay.add(calcLabel, "display")
 
 

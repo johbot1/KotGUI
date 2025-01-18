@@ -7,6 +7,7 @@
  * manipulated to change how the calculator looks and operates.
  */
 
+import java.text.NumberFormat
 import javax.swing.JLabel
 import javax.swing.JPanel
 
@@ -15,9 +16,11 @@ const val borderThickness = 2
 const val screenWidth = 250
 const val screenHeight = screenWidth / 2
 const val calcDisplayFont = 65
+
 //ButtonPanelWidth MUST equal 500 when combining with operationDimensions
 const val buttonPanelWidth = 350
 const val buttonPanelHeight = 250
+
 //OperationDimenesions MUST equal 500 when combining with ButtonPanelWidth
 const val operationsPanelDimensions = 150
 const val opButtonDimensions = 25
@@ -25,9 +28,10 @@ const val calcButtonWidth = 80
 const val calcButtonHeight = 75
 
 //Declare variables for calculation
-var currentOperation = ""
+var currentOperation = "input"
 var storedNum = 0
 var activeNum = 0
+var displayNum = NumberFormat.getIntegerInstance().format(activeNum)
 
 //Declare Labels/Panels
 val calcLabel = JLabel("245")
@@ -36,5 +40,5 @@ val buttonPanel = JPanel()
 val operationsPanel = JPanel()
 
 //Lists for creating Buttons
-val operandsLabels = listOf("+/-","+","-","*","/","=","clr")
-val numberLabels = listOf(0,1,2,3,4,5,6,7,8,9)
+val operandsLabels = listOf("+/-", "+", "-", "*", "/", "=", "clr")
+val numberLabels = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
