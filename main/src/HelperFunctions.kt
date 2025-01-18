@@ -1,18 +1,14 @@
 /**
- * Helper Functions
+ * Helper Functions.kt
  * @author John Botonakis
- * @desc
+ * @desc These helper functions are created with the sole intent of
+ * building off of one another to handle button creation,
+ * button behavior, and calculation.
  */
 import java.awt.Dimension
 import java.awt.Font
 import javax.swing.JButton
 import javax.swing.JPanel
-
-val operandsLabels = listOf("+/-","+","-","*","/","=","clr")
-val numberLabels = listOf(0,1,2,3,4,5,6,7,8,9)
-const val opButtonDimensions = 25
-const val calcButtonWidth = 80
-const val calcButtonHeight = 75
 
 
 /**

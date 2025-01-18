@@ -1,29 +1,25 @@
-//Main.kt
-//Author: John Botonakis
-//Desc:
-//
+/**
+ * Main.kt
+ * @author John Botonakis
+ * @desc This is the main function that will run the entire calculator
+ * In here, the main JFrame is created. After the others are created in
+ * Constants.kt, they are stylized and applied to the mainJFrame,
+ * along with their respective buttons
+ */
+
 import java.awt.*
 import javax.swing.*
 
-
-
-//Declare Labels/Panels
-val calcLabel = JLabel("245")
-val calcScreenDisplay = JPanel()
-val buttonPanel = JPanel()
-val operationsPanel = JPanel()
-var currentOperation = ""
-var storedNum = 0
-var activeNum = 0
-
-//Constants
-const val borderThickness = 2
-const val screenWidth = 250
-const val screenHeight = screenWidth / 2
-const val calcDisplayFont = 65
-const val buttonPanelWidth = 350
-const val buttonPanelHeight = 250
-const val operationDimensions = 150
+/**
+ * Main
+ *
+ * This is the main function that will run the entire calculator
+ * In here, the main JFrame is created. After the others are created in
+ * Constants.kt, they are stylized and applied to the mainJFrame,
+ * along with their respective buttons
+ *
+ * @author John Botonakis
+ */
 fun main() {
     //mainJframe setup
     val mainJframe = JFrame("Calculator")
@@ -50,7 +46,6 @@ fun main() {
 
     //Button Panel
     //Using the PanelConstructor, create a buttons panel
-    //ButtonPanelWidth MUST equal 500 when combining with operationDimensions
     buttonPanel.border = BorderFactory.createRaisedBevelBorder()
     buttonPanel.background = Color.GREEN
     buttonPanel.setLayout(GridLayout(3, 2))
@@ -62,10 +57,9 @@ fun main() {
 
     //Operations Panel
     //Using the PanelConstructor, create an operations panel
-    //OperationDimenesions MUST equal 500 when combining with ButtonPanelWidth
     operationsPanel.border = BorderFactory.createLoweredBevelBorder()
     operationsPanel.background = Color.LIGHT_GRAY
-    operationsPanel.preferredSize = Dimension(operationDimensions, operationDimensions)
+    operationsPanel.preferredSize = Dimension(operationsPanelDimensions, operationsPanelDimensions)
     operationsPanel.setLayout(GridLayout(7, 1))
     mainJframe.add(operationsPanel, BorderLayout.EAST)
     //Buttons
