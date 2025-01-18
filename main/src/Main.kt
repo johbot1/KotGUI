@@ -35,7 +35,7 @@ fun main() {
 
     //Calculator "Screen" Panel
     calcScreenDisplay.name = "calcDisplay"
-    calcScreenDisplay.background = Color.CYAN
+    calcScreenDisplay.background = Color.WHITE
     calcScreenDisplay.preferredSize = Dimension(screenWidth, screenHeight)
     calcScreenDisplay.border = BorderFactory.createLineBorder(Color.DARK_GRAY, borderThickness, false)
     mainJframe.add(calcScreenDisplay, BorderLayout.NORTH)
@@ -50,7 +50,7 @@ fun main() {
     //Button Panel
     //Using the PanelConstructor, create a buttons panel
     buttonPanel.border = BorderFactory.createRaisedBevelBorder()
-    buttonPanel.background = Color.GREEN
+    buttonPanel.background = Color.GRAY
     buttonPanel.setLayout(GridLayout(3, 2))
     buttonPanel.preferredSize = Dimension(buttonPanelWidth, buttonPanelHeight)
     mainJframe.add(buttonPanel, BorderLayout.WEST)
