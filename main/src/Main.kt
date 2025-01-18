@@ -5,7 +5,6 @@
 import java.awt.*
 import javax.swing.*
 
-//import java.util.Date
 
 
 //Declare Labels/Panels
@@ -17,7 +16,7 @@ var currentOperation = ""
 var storedNum = 0
 var activeNum = 0
 
-
+//Constants
 const val borderThickness = 2
 const val screenWidth = 250
 const val screenHeight = screenWidth / 2
