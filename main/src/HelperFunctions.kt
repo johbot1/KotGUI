@@ -6,10 +6,9 @@
 import java.awt.Dimension
 import java.awt.Font
 import javax.swing.JButton
-import javax.swing.JLabel
 import javax.swing.JPanel
 
-val operandsLabels = listOf("+",".","-","*","/","=","clr")
+val operandsLabels = listOf("+/-","+","-","*","/","=","clr")
 val numberLabels = listOf(0,1,2,3,4,5,6,7,8,9)
 const val opButtonDimensions = 25
 const val calcButtonWidth = 80
@@ -38,11 +37,10 @@ fun createButtons(): Pair <List<JButton>, List<JButton>> {
     }
 
     //Creating all OPERATIONAL Buttons
-    for (label in operandsLabels){
-        val buttonName = "oper_$label"
+    for (label in operandsLabels) {
         val button = JButton(label)
-        button.name = buttonName
-        button.preferredSize = Dimension(opButtonDimensions,opButtonDimensions)
+        button.name = label
+        button.preferredSize = Dimension(opButtonDimensions, opButtonDimensions)
         button.setFont(Font("Verdana", Font.PLAIN, 30))
         operationalButtons.add(button)
 //        println("Button $buttonName has been added!")//Used for debugging purposes
@@ -69,7 +67,7 @@ fun addNumButtons(buttonList: List<JButton>, homePanel: JPanel){
  * then apply that number as text to the calcLabel display
  */
 fun numButtonsBehavior(button: JButton) {
-    if (activeNum == 0){
+    if (activeNum == 0) {
         val activeNumStr = button.name
         calcLabel.text = activeNumStr
         activeNum = activeNumStr.toInt()
@@ -78,7 +76,7 @@ fun numButtonsBehavior(button: JButton) {
         calcLabel.text = activeNumStr
         activeNum = activeNumStr.toInt()
     }
-    println("activeNum: $activeNum")
+//    println("activeNum: $activeNum")
     }
 
 /**
@@ -93,13 +91,6 @@ fun addOpButtons(buttonList: List<JButton>, homePanel: JPanel){
     }
 }
 
-/**
- * Resets the calculator display to 0, disregarding any operations previously entered.
- */
-fun resetCalcDisplay(label: JLabel){
-    label.text = ""
-    currentOperation = ""
-    }
 
 /**
  * Assigns operations based on the button title
@@ -107,29 +98,33 @@ fun resetCalcDisplay(label: JLabel){
  */
 fun assignOperation(opButton: JButton){
     when(opButton.text){
+        //Other Operation Behavior
         "+", "-", "*", "/" -> {
             opButton.addActionListener {
                 currentOperation = opButton.text
                 storedNum = activeNum
                 activeNum = 0
-                println(opButton.text + " clicked!") //Used for debugging purposes
             }
         }
-
+        //Equals Sign Behavior
         "=" -> {
+            currentOperation = opButton.text
             opButton.addActionListener {
                 equate()
-//                println(opButton.text + " clicked!") //Used for debugging purposes
             }
         }
-
+        //Clear Display
         "clr" -> {opButton.addActionListener {
             activeNum = 0
             storedNum = 0
-            resetCalcDisplay(calcLabel)
-//            println(opButton.text + " clicked!") //Used for debugging purposes
+            calcLabel.text = activeNum.toString()
+            currentOperation = ""
         }
         }
+        "+/-" -> {opButton.addActionListener {
+            //if no prefix, add a "-"
+            //else
+        }}
     }
 }
 
