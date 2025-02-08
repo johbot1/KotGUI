@@ -10,7 +10,7 @@ One of three Kotlin related projects for my final semester, this one a GUI proje
 # How to Run:
 - Download the files, then navigate to the directory they are stored in via a command line
 - Run the following command:
-  -   `kotlinc  -include-runtime -d kotapp.jar`
+  -   `kotlinc Main.kt Constants.kt HelperFunctions.kt -include-runtime -d kotgui.jar`
   -   This will create a ".jar" file to run with the Java Environment
 - Finally, run the following command to run the program:
-  - `java -jar kotapp.jar`
+  - `jjava -jar kotgui.jar `
