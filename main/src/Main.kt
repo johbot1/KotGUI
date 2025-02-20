@@ -32,26 +32,26 @@ import javax.swing.SwingConstants
 
 fun main() {
     //mainJframe setup
-    val mainJframe = JFrame("Calculator")
-    mainJframe.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
-    mainJframe.size = Dimension(500, 500)
-    mainJframe.setLocationRelativeTo(null)
+    val foundationJFrame = JFrame("Calculator")
+    foundationJFrame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
+    foundationJFrame.size = Dimension(500, 500)
+    foundationJFrame.setLocationRelativeTo(null)
 
     //Button Creation
     val (numberButtons, operationalButtons) = createButtons()
 
     //Calculator "Screen" Panel
-    calcScreenDisplay.name = "calcDisplay"
-    calcScreenDisplay.background = Color.WHITE
-    calcScreenDisplay.preferredSize = Dimension(SCREEN_WIDTH, SCREEN_HEIGHT)
-    calcScreenDisplay.border = BorderFactory.createLineBorder(Color.DARK_GRAY, BORDER_THICKNESS, false)
-    mainJframe.add(calcScreenDisplay, BorderLayout.NORTH)
+    calculationResultScreen.name = "calculationResultDisplay"
+    calculationResultScreen.background = Color.WHITE
+    calculationResultScreen.preferredSize = Dimension(SCREEN_WIDTH, SCREEN_HEIGHT)
+    calculationResultScreen.border = BorderFactory.createLineBorder(Color.DARK_GRAY, BORDER_THICKNESS, false)
+    foundationJFrame.add(calculationResultScreen, BorderLayout.NORTH)
 
     //Calculator Display Label
-    calcLabel.horizontalAlignment = SwingConstants.RIGHT
-    calcLabel.setFont(Font("Verdana", Font.PLAIN, CALC_DISPLAY_HEIGHT))
-    calcLabel.text = displayNum
-    calcScreenDisplay.add(calcLabel, "display")
+    calculationResultLabel.horizontalAlignment = SwingConstants.RIGHT
+    calculationResultLabel.setFont(Font("Verdana", Font.PLAIN, CALC_DISPLAY_HEIGHT))
+    calculationResultLabel.text = displayNum
+    calculationResultScreen.add(calculationResultLabel, "display")
 
 
     //Button Panel
@@ -60,9 +60,9 @@ fun main() {
     buttonPanel.background = Color.GRAY
     buttonPanel.setLayout(GridLayout(3, 2))
     buttonPanel.preferredSize = Dimension(BUTTON_PANEL_WIDTH, BUTTON_PANEL_HEIGHT)
-    mainJframe.add(buttonPanel, BorderLayout.WEST)
+    foundationJFrame.add(buttonPanel, BorderLayout.WEST)
     //Buttons
-    addNumButtons(numberButtons, buttonPanel)
+    addNumberButtons(numberButtons, buttonPanel)
 
 
     //Operations Panel
@@ -71,11 +71,11 @@ fun main() {
     operationsPanel.background = Color.LIGHT_GRAY
     operationsPanel.preferredSize = Dimension(OPERATION_PANEL_DIMENSIONS, OPERATION_PANEL_DIMENSIONS)
     operationsPanel.setLayout(GridLayout(7, 1))
-    mainJframe.add(operationsPanel, BorderLayout.EAST)
+    foundationJFrame.add(operationsPanel, BorderLayout.EAST)
     //Buttons
-    addOpButtons(operationalButtons, operationsPanel)
+    addOperationalButtons(operationalButtons, operationsPanel)
 
     //MainJFrame attributes
-    mainJframe.isVisible = true
-    mainJframe.isResizable = false
+    foundationJFrame.isVisible = true
+    foundationJFrame.isResizable = false
 }

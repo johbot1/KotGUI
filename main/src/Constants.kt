@@ -34,8 +34,8 @@ var activeNum = 0
 var displayNum = NumberFormat.getIntegerInstance().format(activeNum)
 
 //Declare Labels/Panels
-val calcLabel = JLabel("245")
-val calcScreenDisplay = JPanel()
+val calculationResultLabel = JLabel("245")
+val calculationResultScreen = JPanel()
 val buttonPanel = JPanel()
 val operationsPanel = JPanel()
 

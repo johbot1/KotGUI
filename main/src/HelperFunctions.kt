@@ -48,7 +48,7 @@ fun createButtons(): Pair<List<JButton>, List<JButton>> {
  * @param buttonList  A list of JButton objects to sort through
  * @param homePanel  The JPanel where each of the filtered buttons will be stuck to
  */
-fun addNumButtons(buttonList: List<JButton>, homePanel: JPanel) {
+fun addNumberButtons(buttonList: List<JButton>, homePanel: JPanel) {
     for (button in buttonList) {
         button.addActionListener {
             numButtonsBehavior(button)
@@ -66,11 +66,11 @@ fun addNumButtons(buttonList: List<JButton>, homePanel: JPanel) {
 fun numButtonsBehavior(button: JButton) {
     if (activeNum == 0) {
         val activeNumStr = button.name
-        calcLabel.text = activeNumStr
+        calculationResultLabel.text = activeNumStr
         activeNum = activeNumStr.toInt()
     } else {
         val activeNumStr = activeNum.toString() + button.name
-        calcLabel.text = activeNumStr
+        calculationResultLabel.text = activeNumStr
         activeNum = activeNumStr.toInt()
     }
 //    println("activeNum: $activeNum")//Used for debugging
@@ -81,7 +81,7 @@ fun numButtonsBehavior(button: JButton) {
  * @param buttonList  A list of JButton objects to sort through
  * @param homePanel  The panel where each of the buttons will be stuck to
  */
-fun addOpButtons(buttonList: List<JButton>, homePanel: JPanel) {
+fun addOperationalButtons(buttonList: List<JButton>, homePanel: JPanel) {
     for (button in buttonList) {
         opButtonsBehavior(button)
         homePanel.add(button)
@@ -115,7 +115,7 @@ fun opButtonsBehavior(opButton: JButton) {
             opButton.addActionListener {
                 activeNum = 0
                 storedNum = 0
-                calcLabel.text = activeNum.toString()
+                calculationResultLabel.text = activeNum.toString()
                 currentOperation = "input"
             }
         }
@@ -123,7 +123,7 @@ fun opButtonsBehavior(opButton: JButton) {
         "+/-" -> {
             opButton.addActionListener {
                 activeNum *= -1
-                calcLabel.text = activeNum.toString()
+                calculationResultLabel.text = activeNum.toString()
             }
         }
     }
@@ -138,25 +138,25 @@ fun equate() {
         "+" -> {
             val addReturn = storedNum + activeNum
             activeNum = addReturn
-            calcLabel.text = addReturn.toString()
+            calculationResultLabel.text = addReturn.toString()
         }
 
         "-" -> {
             val subReturn = storedNum - activeNum
             storedNum = subReturn
-            calcLabel.text = subReturn.toString()
+            calculationResultLabel.text = subReturn.toString()
         }
 
         "/" -> {
             val divReturn = storedNum / activeNum
             storedNum = divReturn
-            calcLabel.text = divReturn.toString()
+            calculationResultLabel.text = divReturn.toString()
         }
 
         "*" -> {
             val multReturn = storedNum * activeNum
             storedNum = multReturn
-            calcLabel.text = multReturn.toString()
+            calculationResultLabel.text = multReturn.toString()
         }
     }
     activeNum = 0
