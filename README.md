@@ -13,4 +13,4 @@ One of three Kotlin related projects for my final semester, this one a GUI proje
   -   `kotlinc Main.kt Constants.kt HelperFunctions.kt -include-runtime -d kotgui.jar`
   -   This will create a ".jar" file to run with the Java Environment
 - Finally, run the following command to run the program:
-  - `jjava -jar kotgui.jar`
+  - `java -jar kotgui.jar`
