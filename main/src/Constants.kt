@@ -13,19 +13,19 @@ import javax.swing.JPanel
 
 //Constants
 const val BORDER_THICKNESS = 2
-const val screenWidth = 250
-const val screenHeight = screenWidth / 2
-const val calcDisplayFont = 65
+const val SCREEN_WIDTH = 250
+const val SCREEN_HEIGHT = SCREEN_WIDTH / 2
+const val CALC_DISPLAY_HEIGHT = 65
 
 //ButtonPanelWidth MUST equal 500 when combining with operationDimensions
-const val buttonPanelWidth = 350
-const val buttonPanelHeight = 250
+const val BUTTON_PANEL_WIDTH = 350
+const val BUTTON_PANEL_HEIGHT = 250
 
 //OperationDimenesions MUST equal 500 when combining with ButtonPanelWidth
-const val operationsPanelDimensions = 150
-const val opButtonDimensions = 25
-const val calcButtonWidth = 80
-const val calcButtonHeight = 75
+const val OPERATION_PANEL_DIMENSIONS = 150
+const val OPERATION_BUTTON_DIMENSIONS = 25
+const val CALCULATION_BUTTON_WIDTH = 80
+const val CALCULATION_BUTTON_HEIGHT = 75
 
 //Declare variables for calculation
 var currentOperation = "input"

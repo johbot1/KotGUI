@@ -27,7 +27,7 @@ fun createButtons(): Pair<List<JButton>, List<JButton>> {
         val buttonName = "$label"
         val button = JButton(label.toString())
         button.name = buttonName
-        button.preferredSize = Dimension(calcButtonWidth, calcButtonHeight)
+        button.preferredSize = Dimension(CALCULATION_BUTTON_WIDTH, CALCULATION_BUTTON_HEIGHT)
         button.setFont(Font("Verdana", Font.PLAIN, 25))
         numberButtons.add(button)
     }
@@ -36,7 +36,7 @@ fun createButtons(): Pair<List<JButton>, List<JButton>> {
     for (label in operandsLabels) {
         val button = JButton(label)
         button.name = label
-        button.preferredSize = Dimension(opButtonDimensions, opButtonDimensions)
+        button.preferredSize = Dimension(OPERATION_BUTTON_DIMENSIONS, OPERATION_BUTTON_DIMENSIONS)
         button.setFont(Font("Verdana", Font.PLAIN, 30))
         operationalButtons.add(button)
     }
