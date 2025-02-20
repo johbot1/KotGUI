@@ -12,7 +12,7 @@ import javax.swing.JLabel
 import javax.swing.JPanel
 
 //Constants
-const val borderThickness = 2
+const val BORDER_THICKNESS = 2
 const val screenWidth = 250
 const val screenHeight = screenWidth / 2
 const val calcDisplayFont = 65

@@ -11,7 +11,6 @@ import java.awt.*
 import javax.swing.BorderFactory
 import javax.swing.JFrame
 import javax.swing.SwingConstants
-import java.text.NumberFormat
 
 /**
  * Main
@@ -23,6 +22,14 @@ import java.text.NumberFormat
  *
  * @author John Botonakis
  */
+
+//TODO: Persist previous answer when doing operations
+//TODO: Visually differentiate the operations from the +/-
+//TODO: calcScreen -> CalcResult Screen
+//TODO: Better naming conventions
+//TODO: Rename constants to all Uppercases with "_" for spaces
+//TODO: Use ENUMS for operations
+
 fun main() {
     //mainJframe setup
     val mainJframe = JFrame("Calculator")
@@ -37,7 +44,7 @@ fun main() {
     calcScreenDisplay.name = "calcDisplay"
     calcScreenDisplay.background = Color.WHITE
     calcScreenDisplay.preferredSize = Dimension(screenWidth, screenHeight)
-    calcScreenDisplay.border = BorderFactory.createLineBorder(Color.DARK_GRAY, borderThickness, false)
+    calcScreenDisplay.border = BorderFactory.createLineBorder(Color.DARK_GRAY, BORDER_THICKNESS, false)
     mainJframe.add(calcScreenDisplay, BorderLayout.NORTH)
 
     //Calculator Display Label
