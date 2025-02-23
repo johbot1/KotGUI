@@ -11,6 +11,8 @@ import javax.swing.JButton
 import javax.swing.JPanel
 
 var isNewEntry = true // New flag to track when to clear input
+
+
 /**
  * Creates buttons for numbers and operations, and returns them in a populated list.
  * Each of the names is assigned a prefix based on their function in the program
@@ -90,14 +92,6 @@ fun addOperationalButtons(buttonList: List<JButton>, homePanel: JPanel) {
     }
 }
 
-
-fun setOperation(operation: Operation) {
-    fun setOperation(op: Operation) {
-        currentOperation = op
-        storedNum = activeNum
-        activeNum = 0
-    }
-}
 
 /**
  *
