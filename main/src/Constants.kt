@@ -41,13 +41,13 @@ var displayNum = NumberFormat.getIntegerInstance().format(activeNum)
 
 //Declare Labels/Panels
 val calculationResultLabel = JLabel("245")
-val calculationResultScreen = JPanel()
-val buttonPanel = JPanel()
-val operationsPanel = JPanel()
+val calculationResultPanel = JPanel()
+val buttonFoundationPanel = JPanel()
+val operationsFoundationPanel = JPanel()
 
 //Lists for creating Buttons
-val operandsLabels = listOf("+/-", "+", "-", "*", "/", "=", "clr")
-val numberLabels = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+val operandTextDisplays = listOf("+/-", "+", "-", "*", "/", "=", "clr")
+val numberTextDisplays = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
 
 //Style Constants
 const val NUMBER_FONT_SIZE = 25

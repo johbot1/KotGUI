@@ -5,13 +5,12 @@
  * building off of one another to handle button creation,
  * button behavior, and calculation.
  */
-import java.awt.Color
 import java.awt.Dimension
 import java.awt.Font
 import javax.swing.JButton
 import javax.swing.JPanel
 
-var isNewEntry = true // New flag to track when to clear input
+var isNewEquationCheck = true // New flag to track when to clear input
 
 
 /**
@@ -21,12 +20,12 @@ var isNewEntry = true // New flag to track when to clear input
  *
  * @return A pair of lists, populated with buttons for specific areas <numberButtons,operationalButtons>
  */
-fun createButtons(): Pair<List<JButton>, List<JButton>> {
+fun createAllButtons(): Pair<List<JButton>, List<JButton>> {
     val numberButtons = mutableListOf<JButton>()
     val operationalButtons = mutableListOf<JButton>()
 
     //Creating/Stylizing all NUMBER buttons
-    for (label in numberLabels) {
+    for (label in numberTextDisplays) {
         val buttonName = "$label"
         val button = JButton(label.toString())
         button.name = buttonName
@@ -36,7 +35,7 @@ fun createButtons(): Pair<List<JButton>, List<JButton>> {
     }
 
     // Creating all OPERATIONAL buttons
-    for (label in operandsLabels) {
+    for (label in operandTextDisplays) {
         val button = JButton(label)
         button.name = label
         //Stylizing the OPERATIONAL buttons
@@ -68,11 +67,11 @@ fun addNumberButtons(buttonList: List<JButton>, homePanel: JPanel) {
  * @param button The specific button that needs to be assigned behavior
  */
 fun numButtonsBehavior(button: JButton) {
-    if (isNewEntry) {
+    if (isNewEquationCheck) {
         // Clear the display and set the new number (after an operation)
         calculationResultLabel.text = button.name
         activeNum = button.name.toInt()
-        isNewEntry = false // Reset the flag after first digit
+        isNewEquationCheck = false // Reset the flag after first digit
     } else {
         // Append digits normally (after the first number is entered)
         val activeNumStr = calculationResultLabel.text + button.name
@@ -89,17 +88,18 @@ fun numButtonsBehavior(button: JButton) {
  */
 fun addOperationalButtons(buttonList: List<JButton>, homePanel: JPanel) {
     for (button in buttonList) {
-        opButtonsBehavior(button)
+        operationalButtonsBehavior(button)
         homePanel.add(button)
     }
 }
 
 
 /**
- *
+ * Updates the "clr" button depending on the caller; "=" will always set the title to "all_clr"
+ * @param caller Defines who is actually calling this function as behavior changes based on this
  */
 fun updateClrButtonText(caller: Int) {
-    val clrButton = operationsPanel.components
+    val clrButton = operationsFoundationPanel.components
         .filterIsInstance<JButton>()
         .firstOrNull { it.text in listOf("clr", "all_clr") }
 
@@ -116,39 +116,39 @@ fun updateClrButtonText(caller: Int) {
  * Assigns a behavior based on the button title
  * @param opButton The button that will be assigned a behavior
  */
-fun opButtonsBehavior(opButton: JButton) {
+fun operationalButtonsBehavior(opButton: JButton) {
     when (opButton.text) {
         "+" -> {
             opButton.addActionListener {
                 currentOperation = Operation.ADD
                 storedNum = activeNum
-                isNewEntry = true // Set to true to clear the display for the next number
+                isNewEquationCheck = true // Set to true to clear the display for the next number
             }
         }
         "-" -> {
             opButton.addActionListener {
                 currentOperation = Operation.SUBTRACT
                 storedNum = activeNum
-                isNewEntry = true // Set to true to clear the display for the next number
+                isNewEquationCheck = true // Set to true to clear the display for the next number
             }
         }
         "*" -> {
             opButton.addActionListener {
                 currentOperation = Operation.MULTIPLY
                 storedNum = activeNum
-                isNewEntry = true // Set to true to clear the display for the next number
+                isNewEquationCheck = true // Set to true to clear the display for the next number
             }
         }
         "/" -> {
             opButton.addActionListener {
                 currentOperation = Operation.DIVIDE
                 storedNum = activeNum
-                isNewEntry = true // Set to true to clear the display for the next number
+                isNewEquationCheck = true // Set to true to clear the display for the next number
             }
         }
         "=" -> {
             opButton.addActionListener {
-                equate() // Handle the equation after operation is set
+                calculate() // Handle the equation after operation is set
             }
         }
         "clr" -> {
@@ -181,7 +181,7 @@ fun opButtonsBehavior(opButton: JButton) {
  * Handles what happens when the "=" is pressed, signaling a completed equation,
  * based on the currently selected operation
  */
-fun equate() {
+fun calculate() {
         when (currentOperation) {
             Operation.ADD -> storedNum += activeNum
             Operation.SUBTRACT -> storedNum -= activeNum
@@ -205,7 +205,10 @@ fun equate() {
 
 
 /**
+ * Stylizes each of the buttons passed in, based on their value
  *
+ * @param JButton The button to be customized
+ * @param isNumber A boolean check if the passed in buttons are part of the Numbers or Operations
  */
 fun styleButtons(button: JButton, isNumber: Boolean) {
     if (isNumber) {
@@ -216,14 +219,14 @@ fun styleButtons(button: JButton, isNumber: Boolean) {
         button.foreground = TEXT_COLOR
     } else {
         button.isOpaque = true
-        button.setBorderPainted(false)  // Remove border if necessary
+        button.setBorderPainted(false)
         button.font = Font("Arial", Font.BOLD, 20)
         button.background = OPERATION_BUTTON_BACKGROUND_COLOR  // Dark gray for operations
         button.foreground = OPERATION_TEXT_COLOR
     }
     if (button.name == "+/-") {
         button.isOpaque = true
-        button.setBorderPainted(false)  // Remove border if necessary
+        button.setBorderPainted(false)
         button.font = Font("Arial", Font.BOLD, 20);
         button.background = SPECIAL_BUTTON_BACKGROUND_COLOR  // Unique purple for "+/-"
         button.foreground = OPERATION_TEXT_COLOR

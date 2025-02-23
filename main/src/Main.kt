@@ -23,8 +23,6 @@ import javax.swing.SwingConstants
  * @author John Botonakis
  */
 
-//TODO: Better naming conventions
-
 fun main() {
     //mainJframe setup
     val foundationJFrame = JFrame("Calculator")
@@ -33,42 +31,42 @@ fun main() {
     foundationJFrame.setLocationRelativeTo(null)
 
     //Button Creation
-    val (numberButtons, operationalButtons) = createButtons()
+    val (numberButtons, operationalButtons) = createAllButtons()
 
     //Calculator "Screen" Panel
-    calculationResultScreen.name = "calculationResultDisplay"
-    calculationResultScreen.background = Color.WHITE
-    calculationResultScreen.preferredSize = Dimension(SCREEN_WIDTH, SCREEN_HEIGHT)
-    calculationResultScreen.border = BorderFactory.createLineBorder(Color.DARK_GRAY, BORDER_THICKNESS, false)
-    foundationJFrame.add(calculationResultScreen, BorderLayout.NORTH)
+    calculationResultPanel.name = "calculationResultDisplay"
+    calculationResultPanel.background = Color.WHITE
+    calculationResultPanel.preferredSize = Dimension(SCREEN_WIDTH, SCREEN_HEIGHT)
+    calculationResultPanel.border = BorderFactory.createLineBorder(Color.DARK_GRAY, BORDER_THICKNESS, false)
+    foundationJFrame.add(calculationResultPanel, BorderLayout.NORTH)
 
     //Calculator Display Label
     calculationResultLabel.horizontalAlignment = SwingConstants.RIGHT
     calculationResultLabel.setFont(Font("Verdana", Font.PLAIN, CALC_DISPLAY_HEIGHT))
     calculationResultLabel.text = displayNum
-    calculationResultScreen.add(calculationResultLabel, "display")
+    calculationResultPanel.add(calculationResultLabel, "display")
 
 
     //Button Panel
     //Using the PanelConstructor, create a buttons panel
-    buttonPanel.border = BorderFactory.createRaisedBevelBorder()
-    buttonPanel.background = Color.GRAY
-    buttonPanel.setLayout(GridLayout(3, 2))
-    buttonPanel.preferredSize = Dimension(BUTTON_PANEL_WIDTH, BUTTON_PANEL_HEIGHT)
-    foundationJFrame.add(buttonPanel, BorderLayout.WEST)
+    buttonFoundationPanel.border = BorderFactory.createRaisedBevelBorder()
+    buttonFoundationPanel.background = Color.GRAY
+    buttonFoundationPanel.setLayout(GridLayout(3, 2))
+    buttonFoundationPanel.preferredSize = Dimension(BUTTON_PANEL_WIDTH, BUTTON_PANEL_HEIGHT)
+    foundationJFrame.add(buttonFoundationPanel, BorderLayout.WEST)
     //Buttons
-    addNumberButtons(numberButtons, buttonPanel)
+    addNumberButtons(numberButtons, buttonFoundationPanel)
 
 
     //Operations Panel
     //Using the PanelConstructor, create an operations panel
-    operationsPanel.border = BorderFactory.createLoweredBevelBorder()
-    operationsPanel.background = Color.LIGHT_GRAY
-    operationsPanel.preferredSize = Dimension(OPERATION_PANEL_DIMENSIONS, OPERATION_PANEL_DIMENSIONS)
-    operationsPanel.setLayout(GridLayout(7, 1))
-    foundationJFrame.add(operationsPanel, BorderLayout.EAST)
+    operationsFoundationPanel.border = BorderFactory.createLoweredBevelBorder()
+    operationsFoundationPanel.background = Color.LIGHT_GRAY
+    operationsFoundationPanel.preferredSize = Dimension(OPERATION_PANEL_DIMENSIONS, OPERATION_PANEL_DIMENSIONS)
+    operationsFoundationPanel.setLayout(GridLayout(7, 1))
+    foundationJFrame.add(operationsFoundationPanel, BorderLayout.EAST)
     //Buttons
-    addOperationalButtons(operationalButtons, operationsPanel)
+    addOperationalButtons(operationalButtons, operationsFoundationPanel)
 
     //MainJFrame attributes
     foundationJFrame.isVisible = true
