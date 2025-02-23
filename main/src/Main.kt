@@ -23,7 +23,6 @@ import javax.swing.SwingConstants
  * @author John Botonakis
  */
 
-//TODO: Visually differentiate the operations from the +/-
 //TODO: Better naming conventions
 
 fun main() {

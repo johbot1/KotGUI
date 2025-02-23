@@ -7,6 +7,7 @@
  * manipulated to change how the calculator looks and operates.
  */
 
+import java.awt.Color
 import java.text.NumberFormat
 import javax.swing.JLabel
 import javax.swing.JPanel
@@ -15,7 +16,6 @@ import javax.swing.JPanel
 enum class Operation {
     ADD, SUBTRACT, MULTIPLY, DIVIDE, NONE
 }
-
 
 //Constants
 const val BORDER_THICKNESS = 2
@@ -48,3 +48,11 @@ val operationsPanel = JPanel()
 //Lists for creating Buttons
 val operandsLabels = listOf("+/-", "+", "-", "*", "/", "=", "clr")
 val numberLabels = listOf(0, 1, 2, 3, 4, 5, 6, 7, 8, 9)
+
+//Style Constants
+const val NUMBER_FONT_SIZE = 25
+val NUMBER_BUTTON_BACKGROUND_COLOR = Color(220, 220, 220) // Light gray for numbers
+val OPERATION_BUTTON_BACKGROUND_COLOR = Color(100, 100, 100) // Dark gray for operations
+val SPECIAL_BUTTON_BACKGROUND_COLOR = Color(150, 100, 255) // Purple for "+/-"
+val TEXT_COLOR = Color.BLACK // Default text color
+val OPERATION_TEXT_COLOR = Color.WHITE // White text for operations

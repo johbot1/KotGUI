@@ -5,6 +5,7 @@
  * building off of one another to handle button creation,
  * button behavior, and calculation.
  */
+import java.awt.Color
 import java.awt.Dimension
 import java.awt.Font
 import javax.swing.JButton
@@ -24,22 +25,23 @@ fun createButtons(): Pair<List<JButton>, List<JButton>> {
     val numberButtons = mutableListOf<JButton>()
     val operationalButtons = mutableListOf<JButton>()
 
-    //Creating all NUMBER buttons
+    //Creating/Stylizing all NUMBER buttons
     for (label in numberLabels) {
         val buttonName = "$label"
         val button = JButton(label.toString())
         button.name = buttonName
-        button.preferredSize = Dimension(CALCULATION_BUTTON_WIDTH, CALCULATION_BUTTON_HEIGHT)
-        button.setFont(Font("Verdana", Font.PLAIN, 25))
+        //Stylizing the NUMBER buttons
+        styleButtons(button, true)
         numberButtons.add(button)
     }
 
-    //Creating all OPERATIONAL Buttons
+    // Creating all OPERATIONAL buttons
     for (label in operandsLabels) {
         val button = JButton(label)
         button.name = label
-        button.preferredSize = Dimension(OPERATION_BUTTON_DIMENSIONS, OPERATION_BUTTON_DIMENSIONS)
-        button.setFont(Font("Verdana", Font.PLAIN, 30))
+        //Stylizing the OPERATIONAL buttons
+        //Treat the negative/positive button separately
+        styleButtons(button, false)
         operationalButtons.add(button)
     }
     return Pair(numberButtons, operationalButtons)
@@ -110,9 +112,6 @@ fun updateClrButtonText(caller: Int) {
 }
 
 
-
-
-
 /**
  * Assigns a behavior based on the button title
  * @param opButton The button that will be assigned a behavior
@@ -178,12 +177,11 @@ fun opButtonsBehavior(opButton: JButton) {
 }
 
 
-
-    /**
-     * Handles what happens when the "=" is pressed, signaling a completed equation,
-     * based on the currently selected operation
-     */
-    fun equate() {
+/**
+ * Handles what happens when the "=" is pressed, signaling a completed equation,
+ * based on the currently selected operation
+ */
+fun equate() {
         when (currentOperation) {
             Operation.ADD -> storedNum += activeNum
             Operation.SUBTRACT -> storedNum -= activeNum
@@ -204,3 +202,30 @@ fun opButtonsBehavior(opButton: JButton) {
         currentOperation = Operation.NONE // Resets operation after equating
         updateClrButtonText(1) // Update clr button text based on activeNum
     }
+
+
+/**
+ *
+ */
+fun styleButtons(button: JButton, isNumber: Boolean) {
+    if (isNumber) {
+        button.isOpaque = true
+        button.preferredSize = Dimension(CALCULATION_BUTTON_WIDTH, CALCULATION_BUTTON_HEIGHT)
+        button.font = Font("Arial", Font.BOLD, NUMBER_FONT_SIZE)  // Bigger, bold font
+        button.background = NUMBER_BUTTON_BACKGROUND_COLOR  // Light gray
+        button.foreground = TEXT_COLOR
+    } else {
+        button.isOpaque = true
+        button.setBorderPainted(false)  // Remove border if necessary
+        button.font = Font("Arial", Font.BOLD, 20)
+        button.background = OPERATION_BUTTON_BACKGROUND_COLOR  // Dark gray for operations
+        button.foreground = OPERATION_TEXT_COLOR
+    }
+    if (button.name == "+/-") {
+        button.isOpaque = true
+        button.setBorderPainted(false)  // Remove border if necessary
+        button.font = Font("Arial", Font.BOLD, 20);
+        button.background = SPECIAL_BUTTON_BACKGROUND_COLOR  // Unique purple for "+/-"
+        button.foreground = OPERATION_TEXT_COLOR
+    }
+}
