@@ -96,20 +96,19 @@ fun addOperationalButtons(buttonList: List<JButton>, homePanel: JPanel) {
 /**
  *
  */
-fun updateClrButtonText() {
+fun updateClrButtonText(caller: Int) {
     val clrButton = operationsPanel.components
-        .filterIsInstance<JButton>() // Get only JButtons
-        .find { it.text == "clr" || it.text == "all clr" }
+        .filterIsInstance<JButton>()
+        .firstOrNull { it.text in listOf("clr", "all_clr") }
 
     clrButton?.let {
-//        println("Current clrButton text: ${it.text}")  // Debugging line
-        if (it.text == "clr") {
-            it.text = "all clr"
-        } else if (it.text == "all clr") {
-            it.text = "clr"
+        when (caller) {
+            1 -> if (it.text == "clr") it.text = "all_clr"  // Change only if caller is equate()
+            2 -> if (it.text == "all_clr") it.text = "clr"  // Change only if caller is clr button
         }
     }
 }
+
 
 
 
@@ -154,9 +153,8 @@ fun opButtonsBehavior(opButton: JButton) {
             }
         }
         "clr" -> {
-            updateClrButtonText() // Update clr button text based on activeNum
             opButton.addActionListener {
-                updateClrButtonText() // Update clr button text based on activeNum
+                updateClrButtonText(2) // Update clr button text based on activeNum
                 if (activeNum == 0) {
                     activeNum = 0
                     storedNum = 0
@@ -204,5 +202,5 @@ fun opButtonsBehavior(opButton: JButton) {
         calculationResultLabel.text = storedNum.toString()
         activeNum = storedNum
         currentOperation = Operation.NONE // Resets operation after equating
-        updateClrButtonText() // Update clr button text based on activeNum
+        updateClrButtonText(1) // Update clr button text based on activeNum
     }
