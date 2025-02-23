@@ -11,6 +11,12 @@ import java.text.NumberFormat
 import javax.swing.JLabel
 import javax.swing.JPanel
 
+//Enums (NONE replaces "input"; both are for no operation selected)
+enum class Operation {
+    ADD, SUBTRACT, MULTIPLY, DIVIDE, NONE
+}
+
+
 //Constants
 const val BORDER_THICKNESS = 2
 const val SCREEN_WIDTH = 250
@@ -28,7 +34,7 @@ const val CALCULATION_BUTTON_WIDTH = 80
 const val CALCULATION_BUTTON_HEIGHT = 75
 
 //Declare variables for calculation
-var currentOperation = "input"
+var currentOperation = Operation.NONE
 var storedNum = 0
 var activeNum = 0
 var displayNum = NumberFormat.getIntegerInstance().format(activeNum)
