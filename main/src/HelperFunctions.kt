@@ -95,39 +95,30 @@ fun addOperationalButtons(buttonList: List<JButton>, homePanel: JPanel) {
  */
 fun opButtonsBehavior(opButton: JButton) {
     when (opButton.text) {
-        //Other Operation Behavior
-        "+", "-", "*", "/" -> {
-            opButton.addActionListener {
-                currentOperation = opButton.text
-                storedNum = activeNum
-                activeNum = 0
-            }
-        }
-        //Equals Sign Behavior
-        "=" -> {
-            currentOperation = opButton.text
-            opButton.addActionListener {
-                equate()
-            }
-        }
-        //Clear Display
-        "clr" -> {
-            opButton.addActionListener {
-                activeNum = 0
-                storedNum = 0
-                calculationResultLabel.text = activeNum.toString()
-                currentOperation = "input"
-            }
-        }
-        //Positive and Negative numbers
-        "+/-" -> {
-            opButton.addActionListener {
-                activeNum *= -1
-                calculationResultLabel.text = activeNum.toString()
-            }
-        }
+        "+" -> setOperation(Operation.ADD)
+        "-" -> setOperation(Operation.SUBTRACT)
+        "*" -> setOperation(Operation.MULTIPLY)
+        "/" -> setOperation(Operation.DIVIDE)
     }
-}
+//        //Other Operation Behavior
+//        "+", "-", "*", "/" -> {
+//            opButton.addActionListener {
+//                currentOperation = opButton.text
+//                storedNum = activeNum
+//                activeNum = 0
+//            }
+//        }
+    //Clear Display
+//        "clr" -> {
+//            opButton.addActionListener {
+//                activeNum = 0
+//                storedNum = 0
+//                calculationResultLabel.text = activeNum.toString()
+//                currentOperation = "input"
+//            }
+//        }
+    }
+
 
 /**
  * Handles what happens when the "=" is pressed, signaling a completed equation,
@@ -135,29 +126,28 @@ fun opButtonsBehavior(opButton: JButton) {
  */
 fun equate() {
     when (currentOperation) {
-        "+" -> {
-            val addReturn = storedNum + activeNum
-            activeNum = addReturn
-            calculationResultLabel.text = addReturn.toString()
+        Operation.ADD -> storedNum += activeNum
+        Operation.SUBTRACT -> storedNum -= activeNum
+        Operation.MULTIPLY -> storedNum *= activeNum
+        Operation.DIVIDE -> {
+            if (activeNum != 0) {
+                storedNum /= activeNum
+            } else {
+                calculationResultLabel.text = "Error"
+                return
+            }
         }
-
-        "-" -> {
-            val subReturn = storedNum - activeNum
-            storedNum = subReturn
-            calculationResultLabel.text = subReturn.toString()
-        }
-
-        "/" -> {
-            val divReturn = storedNum / activeNum
-            storedNum = divReturn
-            calculationResultLabel.text = divReturn.toString()
-        }
-
-        "*" -> {
-            val multReturn = storedNum * activeNum
-            storedNum = multReturn
-            calculationResultLabel.text = multReturn.toString()
-        }
+        Operation.NONE -> return
     }
-    activeNum = 0
+    calculationResultLabel.text = storedNum.toString()
+    activeNum = storedNum
+    currentOperation = Operation.NONE // Resets operation after equating
+}
+
+fun setOperation(operation: Operation) {
+    fun setOperation(op: Operation) {
+        currentOperation = op
+        storedNum = activeNum
+        activeNum = 0
+    }
 }

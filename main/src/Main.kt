@@ -25,10 +25,7 @@ import javax.swing.SwingConstants
 
 //TODO: Persist previous answer when doing operations
 //TODO: Visually differentiate the operations from the +/-
-//TODO: calcScreen -> CalcResult Screen
 //TODO: Better naming conventions
-
-//TODO: Use ENUMS for operations
 
 fun main() {
     //mainJframe setup
