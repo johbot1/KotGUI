@@ -90,6 +90,7 @@ fun addOperationalButtons(buttonList: List<JButton>, homePanel: JPanel) {
     }
 }
 
+
 fun setOperation(operation: Operation) {
     fun setOperation(op: Operation) {
         currentOperation = op
@@ -97,21 +98,25 @@ fun setOperation(operation: Operation) {
         activeNum = 0
     }
 }
+
+/**
+ *
+ */
 fun updateClrButtonText() {
     val clrButton = operationsPanel.components
-        .filterIsInstance<JButton>() // Only keep instances of JButton
-        .find { it.text == "clr" } // Find the clr button
+        .filterIsInstance<JButton>() // Get only JButtons
+        .find { it.text == "clr" || it.text == "all clr" }
 
-    // Only update if the clrButton is found
     clrButton?.let {
-        // Toggle text based on the current state of the button
+//        println("Current clrButton text: ${it.text}")  // Debugging line
         if (it.text == "clr") {
-            it.text = "all clr" // Change to all clr if it's currently "clr"
-        } else {
-            it.text = "clr" // Reset back to "clr"
+            it.text = "all clr"
+        } else if (it.text == "all clr") {
+            it.text = "clr"
         }
     }
 }
+
 
 
 
@@ -152,12 +157,12 @@ fun opButtonsBehavior(opButton: JButton) {
         "=" -> {
             opButton.addActionListener {
                 equate() // Handle the equation after operation is set
-                updateClrButtonText() // Update clr button text based on activeNum
             }
         }
         "clr" -> {
             updateClrButtonText() // Update clr button text based on activeNum
             opButton.addActionListener {
+                updateClrButtonText() // Update clr button text based on activeNum
                 if (activeNum == 0) {
                     activeNum = 0
                     storedNum = 0
@@ -205,4 +210,5 @@ fun opButtonsBehavior(opButton: JButton) {
         calculationResultLabel.text = storedNum.toString()
         activeNum = storedNum
         currentOperation = Operation.NONE // Resets operation after equating
+        updateClrButtonText() // Update clr button text based on activeNum
     }
