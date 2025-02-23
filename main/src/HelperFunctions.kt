@@ -10,9 +10,6 @@ import java.awt.Font
 import javax.swing.JButton
 import javax.swing.JPanel
 
-var isNewEquationCheck = true // New flag to track when to clear input
-
-
 /**
  * Creates buttons for numbers and operations, and returns them in a populated list.
  * Each of the names is assigned a prefix based on their function in the program
@@ -27,7 +24,7 @@ fun createAllButtons(): Pair<List<JButton>, List<JButton>> {
     //Creating/Stylizing all NUMBER buttons
     for (label in numberTextDisplays) {
         val buttonName = "$label"
-        val button = JButton(label.toString())
+        val button = JButton(buttonName)
         button.name = buttonName
         //Stylizing the NUMBER buttons
         styleButtons(button, true)
@@ -39,7 +36,6 @@ fun createAllButtons(): Pair<List<JButton>, List<JButton>> {
         val button = JButton(label)
         button.name = label
         //Stylizing the OPERATIONAL buttons
-        //Treat the negative/positive button separately
         styleButtons(button, false)
         operationalButtons.add(button)
     }
@@ -223,12 +219,13 @@ fun styleButtons(button: JButton, isNumber: Boolean) {
         button.font = Font("Arial", Font.BOLD, 20)
         button.background = OPERATION_BUTTON_BACKGROUND_COLOR  // Dark gray for operations
         button.foreground = OPERATION_TEXT_COLOR
+        if (button.name == "+/-") {
+            button.isOpaque = true
+            button.setBorderPainted(false)
+            button.font = Font("Arial", Font.BOLD, 20)
+            button.background = SPECIAL_BUTTON_BACKGROUND_COLOR  // Unique purple for "+/-"
+            button.foreground = OPERATION_TEXT_COLOR
+        }
     }
-    if (button.name == "+/-") {
-        button.isOpaque = true
-        button.setBorderPainted(false)
-        button.font = Font("Arial", Font.BOLD, 20)
-        button.background = SPECIAL_BUTTON_BACKGROUND_COLOR  // Unique purple for "+/-"
-        button.foreground = OPERATION_TEXT_COLOR
-    }
+
 }

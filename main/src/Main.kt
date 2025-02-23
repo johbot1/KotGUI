@@ -43,7 +43,7 @@ fun main() {
     //Calculator Display Label
     calculationResultLabel.horizontalAlignment = SwingConstants.RIGHT
     calculationResultLabel.setFont(Font("Verdana", Font.PLAIN, CALC_DISPLAY_HEIGHT))
-    calculationResultLabel.text = displayNum
+    calculationResultLabel.text = displayedNumber
     calculationResultPanel.add(calculationResultLabel, "display")
 
 

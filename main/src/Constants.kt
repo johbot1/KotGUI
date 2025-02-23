@@ -27,9 +27,8 @@ const val CALC_DISPLAY_HEIGHT = 65
 const val BUTTON_PANEL_WIDTH = 350
 const val BUTTON_PANEL_HEIGHT = 250
 
-//OperationDimenesions MUST equal 500 when combining with ButtonPanelWidth
+//OperationDimensions MUST equal 500 when combining with ButtonPanelWidth
 const val OPERATION_PANEL_DIMENSIONS = 150
-const val OPERATION_BUTTON_DIMENSIONS = 25
 const val CALCULATION_BUTTON_WIDTH = 80
 const val CALCULATION_BUTTON_HEIGHT = 75
 
@@ -37,7 +36,9 @@ const val CALCULATION_BUTTON_HEIGHT = 75
 var currentOperation = Operation.NONE
 var storedNum = 0
 var activeNum = 0
-var displayNum = NumberFormat.getIntegerInstance().format(activeNum)
+var displayedNumber: String = NumberFormat.getIntegerInstance().format(activeNum)
+var isNewEquationCheck = true // New flag to track when to clear input
+
 
 //Declare Labels/Panels
 val calculationResultLabel = JLabel("245")
@@ -54,5 +55,5 @@ const val NUMBER_FONT_SIZE = 25
 val NUMBER_BUTTON_BACKGROUND_COLOR = Color(220, 220, 220) // Light gray for numbers
 val OPERATION_BUTTON_BACKGROUND_COLOR = Color(100, 100, 100) // Dark gray for operations
 val SPECIAL_BUTTON_BACKGROUND_COLOR = Color(150, 100, 255) // Purple for "+/-"
-val TEXT_COLOR = Color.BLACK // Default text color
-val OPERATION_TEXT_COLOR = Color.WHITE // White text for operations
+val TEXT_COLOR: Color = Color.BLACK // Default text color
+val OPERATION_TEXT_COLOR: Color = Color.WHITE // White text for operations
