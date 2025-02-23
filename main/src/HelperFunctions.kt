@@ -207,7 +207,7 @@ fun calculate() {
 /**
  * Stylizes each of the buttons passed in, based on their value
  *
- * @param JButton The button to be customized
+ * @param button The button to be customized
  * @param isNumber A boolean check if the passed in buttons are part of the Numbers or Operations
  */
 fun styleButtons(button: JButton, isNumber: Boolean) {
@@ -227,7 +227,7 @@ fun styleButtons(button: JButton, isNumber: Boolean) {
     if (button.name == "+/-") {
         button.isOpaque = true
         button.setBorderPainted(false)
-        button.font = Font("Arial", Font.BOLD, 20);
+        button.font = Font("Arial", Font.BOLD, 20)
         button.background = SPECIAL_BUTTON_BACKGROUND_COLOR  // Unique purple for "+/-"
         button.foreground = OPERATION_TEXT_COLOR
     }
